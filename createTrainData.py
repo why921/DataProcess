@@ -76,9 +76,12 @@ for i in range(0, len(GCPdata)):
     nnpp1 = im_data1[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
     nnpp2 = im_data2[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
     nnpp3 = im_data3[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
+
     labelid=label[i]
     write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510' + '\\' + 'ALPSRP267211510_' + str(i) + '_0509_'+str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
               3, band1.DataType, nnpp1, nnpp2, nnpp3)
     labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\\' + 'ALPSRP267211510_' + str(i) + '_0509_'+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
 
 labeltxt.close()
+
+#ALPSRP267211510 r -39.0113639831543 -13.956258773803711  g -42.140995025634766 -15.663641929626465 b -36.93307876586914 -4.1313347816467285
