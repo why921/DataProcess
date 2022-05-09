@@ -15,6 +15,8 @@ import matplotlib.pyplot as plt
 from torchvision.utils import make_grid
 from torchvision.utils import save_image
 
+#E:\ALOSPALSAR\Greenland201101\510
+
 GCPdata = np.loadtxt('green_E_5_3.txt', dtype=int, skiprows=6, usecols=(1, 2))
 XYsize = np.ones_like(GCPdata)
 
