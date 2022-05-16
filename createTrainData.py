@@ -24,7 +24,7 @@ XYdata = np.loadtxt('E:\ALOSPALSAR\Greenland201101\\510\Data0509.txt', dtype=int
 label = np.loadtxt('E:\ALOSPALSAR\Greenland201101\\510\Data0509.txt', dtype=int, skiprows=6, usecols=(7))
 XYsize = np.ones_like(GCPdata[:, 0:2])
 
-RECT_SIZE = 12
+RECT_SIZE = 24
 # os.mkdir("1_size"+str(2*RECT_SIZE))
 XYul = XYdata - RECT_SIZE * XYsize
 XYdr = XYdata + RECT_SIZE * XYsize
@@ -32,6 +32,7 @@ XYdr = XYdata + RECT_SIZE * XYsize
 # ALOS-P1_1__A-ORBIT__ALPSRP256411570_Cal_ML_Spk_Decomppauli
 #"E:\ALOSPALSAR\Greenland201101\510\ALOS-P1_1__A-ORBIT__ALPSRP267211510_Cal_ML_Spk_Decomppauli.tif"
 ds = gdal.Open(r'E:\ALOSPALSAR\Greenland201101\510\ALOS-P1_1__A-ORBIT__ALPSRP267211510_Cal_ML_Spk_Decomppauli.tif')
+
 rows = ds.RasterYSize
 cols = ds.RasterXSize
 bands = ds.RasterCount
@@ -83,9 +84,9 @@ for i in range(0, len(GCPdata)):
     nnpp3 = im_data3[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
 
     labelid=label[i]
-    write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510' + '\\' + 'ALPSRP267211510_' + str(i) + '_0509_'+str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
+    write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510_48' + '\\' + 'ALPSRP267211510_' + str(i) + '_0509_'+str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
               3, band1.DataType, nnpp1, nnpp2, nnpp3)
-    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\\' + 'ALPSRP267211510_' + str(i) + '_0509_'+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
+    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510_48\\' + 'ALPSRP267211510_' + str(i) + '_0509_'+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
 
 labeltxt.close()
 
