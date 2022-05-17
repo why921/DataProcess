@@ -75,7 +75,7 @@ def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1, np2, np3):
     return
 
 #"E:\ALOSPALSAR\TrainData\ALPSRP267211510.txt"
-labeltxt = open('E:\ALOSPALSAR\TrainData\ALPSRP267211510.txt', 'w')
+labeltxt = open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_48.txt', 'w')
 # print(tensor1)
 #E:\ALOSPALSAR\TrainData\ALPSRP267211510
 for i in range(0, len(GCPdata)):
@@ -85,8 +85,8 @@ for i in range(0, len(GCPdata)):
 
     labelid=label[i]
     write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510_48' + '\\' + 'ALPSRP267211510_' + str(i) + '_0509_'+str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
-              3, band1.DataType, nnpp1, nnpp2, nnpp3)
-    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510_48\\' + 'ALPSRP267211510_' + str(i) + '_0509_'+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
+             3, band1.DataType, nnpp1, nnpp2, nnpp3)
+    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_48\\' + 'ALPSRP267211510_' + str(i) + '_0509_'+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
 
 labeltxt.close()
 
