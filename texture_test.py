@@ -17,22 +17,23 @@ from torchvision.utils import save_image
 #Joint time-frequency analysis for radar signal and imaging
 #"E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_0_0509_0.tif"
 #A NEW IMAGING METHOD FOR QUASI GEOSTATIONARY SAR CONSTELLATION USING SPECTRUM GAP FILLING
-#E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_65_0509_1.tif 1
-#E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_80_0509_2.tif
+#E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_65_0509_1.tif 1   57 58 59 60
+#E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_80_0509_2.tif 79-90
 #E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_54_0509_3.tif
 #E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_53_0509_3.tif
-
+#"E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48\ALPSRP267211510_SLC_HH_0_0509_0.tif"
 #"E:\ALOSPALSAR\TrainData\ALPSRP267211510_SLC_48\ALPSRP267211510_SLC_0_0509_0.tif"
-ds = gdal.Open(r'E:\ALOSPALSAR\TrainData\ALPSRP267211510_SLC_48\ALPSRP267211510_SLC_0_0509_0.tif')
+#"E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_48\ALPSRP267211510_SLC_0_0517.tif"
+ds = gdal.Open(r'E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48\ALPSRP267211510_SLC_HH_0_0509_0.tif')
 rows = ds.RasterYSize
 cols = ds.RasterXSize
 bands = ds.RasterCount
 
 band1 = ds.GetRasterBand(1)
-
-
+ds2 = gdal.Open(r'E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_48\ALPSRP267211510_SLC_0_0517.tif')
+band2=ds2.GetRasterBand(1)
 im_data1 = band1.ReadAsArray()  # 获取数据
-
+im_data2=band2.ReadAsArray()
 
 f = np.fft.fft2(im_data1)
 
@@ -42,8 +43,6 @@ fshift = np.fft.fftshift(f)
 
 # fft结果是复数, 其绝对值结果是振幅
 fimg = np.log(np.abs(fshift))
-
-
 
 win_size=24
 hamming_win = np.hamming(win_size)
@@ -57,11 +56,31 @@ for i in range(0,win_size):
 spectrogram = np.log(1+np.abs(spectrogram))
 x, y, fr, fa = spectrogram.shape
 spectrogram = spectrogram.reshape([x*y, fr, fa])
-f1=spectrogram[5,:,:]
+spectrogramxfa = spectrogram.reshape([x, y*fr, fa])
+fxfa1=spectrogramxfa[:,100,:]
+f1=spectrogram[55,:,:]
+f2=spectrogram[1,:,:]
+f3=spectrogram[100,:,:]
+ff=np.zeros((24,24))
+a=0
+for i in range(0, (x*y)):
+    ff+=spectrogram[i,:,:]
+    a=a+1
 
+ff=ff/(x*y)
 # 展示结果
-plt.subplot(121), plt.imshow(im_data1, 'gray'), plt.title('Original Fourier')
+print(a)
+print(x*y)
+plt.subplot(331), plt.imshow(im_data2, 'gray'), plt.title('Original Fourier')
 plt.axis('off')
-plt.subplot(122), plt.imshow(f1, 'gray'), plt.title('Fourier Fourier')
+plt.subplot(332), plt.imshow(f1, 'gray'), plt.title('Fourier Fourier')
+plt.axis('off')
+plt.subplot(333), plt.imshow(f2, 'gray'), plt.title('Fourier Fourier')
+plt.axis('off')
+plt.subplot(334), plt.imshow(f3, 'gray'), plt.title('Fourier Fourier')
+plt.axis('off')
+plt.subplot(335), plt.imshow(ff, 'gray'), plt.title('Fourier Fourier')
+plt.axis('off')
+plt.subplot(336), plt.imshow(fxfa1, 'gray'), plt.title('Fourier Fourier')
 plt.axis('off')
 plt.show()

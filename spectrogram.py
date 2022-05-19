@@ -1,12 +1,5 @@
 import numpy as np
 from osgeo import gdal
-from skimage import data
-import skimage.io
-import skimage.feature
-import skimage.color
-import skimage.transform
-import skimage.util
-import skimage.segmentation
 from scipy import fftpack
 import cv2
 import matplotlib.pyplot as plt

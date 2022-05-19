@@ -76,16 +76,16 @@ for i in range(0, len(GCPdata)):
     nnpp4 = imgVV[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
     labelid=label[i]
     write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48' + '\\' + 'ALPSRP267211510_SLC_HH_' + str(i) + '_0509_'+str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
-              3, band1.DataType, nnpp1)
-    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48\\' + 'ALPSRP267211510_SLC_HH' + str(i) + '_0509_'+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
+              1, band1.DataType, nnpp1)
+    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48\\' + 'ALPSRP267211510_SLC_HH_' + str(i) + '_0509_'+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
     write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48' + '\\' + 'ALPSRP267211510_SLC_HV_' + str(i) + '_0509_'+str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
-              3, band1.DataType, nnpp2)
-    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48\\' + 'ALPSRP267211510_SLC_HV' + str(i) + '_0509_'+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
+              1, band1.DataType, nnpp2)
+    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48\\' + 'ALPSRP267211510_SLC_HV_' + str(i) + '_0509_'+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
     write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48' + '\\' + 'ALPSRP267211510_SLC_VH_' + str(i) + '_0509_' + str(labelid) + '.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
-              3, band1.DataType, nnpp3)
-    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48\\' + 'ALPSRP267211510_SLC_VH' + str(i) + '_0509_' + str(labelid) + '.tif' + ' ' + str(labelid) + '\n')
+              1, band1.DataType, nnpp3)
+    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48\\' + 'ALPSRP267211510_SLC_VH_' + str(i) + '_0509_' + str(labelid) + '.tif' + ' ' + str(labelid) + '\n')
     write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48' + '\\' + 'ALPSRP267211510_SLC_VV_' + str(i) + '_0509_' + str(labelid) + '.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
-              3, band1.DataType, nnpp4)
-    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48\\' + 'ALPSRP267211510_SLC_VV' + str(i) + '_0509_' + str(labelid) + '.tif' + ' ' + str(labelid) + '\n')
+              1, band1.DataType, nnpp4)
+    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48\\' + 'ALPSRP267211510_SLC_VV_' + str(i) + '_0509_' + str(labelid) + '.tif' + ' ' + str(labelid) + '\n')
 
 labeltxt.close()
