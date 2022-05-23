@@ -12,3 +12,51 @@ a=np.ones((20,20))
 
 I[a==1]=3
 print(I)
+
+#"E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_48_4bands\ALPSRP267211510_spe48_0_4b_0.tif"
+import numpy as np
+from osgeo import gdal
+from scipy import fftpack
+import cv2
+
+# "E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_48.txt"
+ds = gdal.Open(r'E:\ALOSPALSAR\Greenland201101\510\ALOS-P1_1__A-ORBIT__ALPSRP267211510_Cal_ML.tif')
+
+spectrogramtxt = open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_48.txt', 'r')
+lines = spectrogramtxt.readlines()
+print(len(lines))
+print(lines[467])
+size=24
+
+#"E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_48_4bands.txt"
+spetxt=open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_48_4bands.txt', 'w')
+def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1, np2, np3):
+    gtiff_driver = gdal.GetDriverByName('GTiff')
+    out_ds = gtiff_driver.Create(filename,
+                                 XSIZE, YSIZE, Bands, DataType)
+    out_ds.SetProjection(ds.GetProjection())
+    out_ds.SetGeoTransform(ds.GetGeoTransform())
+
+    out_band = out_ds.GetRasterBand(1)
+    out_band.WriteArray(np1)
+    out_band = out_ds.GetRasterBand(2)
+    out_band.WriteArray(np2)
+    out_band = out_ds.GetRasterBand(3)
+    out_band.WriteArray(np3)
+    return
+
+path1 = (lines[1]).split(" ")[0]
+path2 = (lines[1]).split(" ")[0]
+path3 = (lines[1]).split(" ")[0]
+path4 = (lines[1]).split(" ")[0]
+print(path1)
+ds1 = gdal.Open(str(path1))
+band1 = ds1.GetRasterBand(1)
+spe1 = band1.ReadAsArray()
+img = np.array([spe1, spe1,spe1])
+
+write_img('test.tif',24,24,3,band1.DataType,spe1,spe1,spe1)
+
+
+
+
