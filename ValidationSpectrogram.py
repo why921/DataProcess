@@ -6,14 +6,14 @@ import cv2
 
 num=0
 
-win_size=24
+win_size=12
 
 hamming_win = np.hamming(win_size)
 hamming_win_2d = np.sqrt(np.outer(hamming_win, hamming_win))
 #"E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\spe4bands24.txt"
 #"E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\slc48.txt"
-imgtxt = open('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\slc48.txt', 'r')
-SLCtxt=open('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\spe4bands24.txt', 'w')
+imgtxt = open('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\slc24.txt', 'r')
+SLCtxt=open('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\spe4bands12.txt', 'w')
 
 def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1,np2,np3,np4):
     gtiff_driver = gdal.GetDriverByName('GTiff')
@@ -88,8 +88,8 @@ while True:
         ff3 = ff3 / (x * y)
         ff4 = ff4 / (x * y)
         #E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\spe4bands24
-        write_img('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\spe4bands24'+'\\'+'spe4bands_'+str(num)+'.tif',win_size,win_size,4,band1.DataType,ff1,ff2,ff3,ff4)
-        SLCtxt.write('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\spe4bands24\spe4bands_'+str(num)+'.tif'+' '+str(img_label))
+        write_img('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\spe4bands12'+'\\'+'spe4bands_'+str(num)+'.tif',win_size,win_size,4,band1.DataType,ff1,ff2,ff3,ff4)
+        SLCtxt.write('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\spe4bands12\spe4bands_'+str(num)+'.tif'+' '+str(img_label))
         num=num+1
     else:
         break
