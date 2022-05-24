@@ -6,16 +6,16 @@ import cv2
 # "E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_48.txt"
 ds = gdal.Open(r'E:\ALOSPALSAR\Greenland201101\510\ALOS-P1_1__A-ORBIT__ALPSRP267211510_Cal_ML.tif')
 
-spectrogramtxt = open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_48.txt', 'r')
+spectrogramtxt = open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_24.txt', 'r')
 lines = spectrogramtxt.readlines()
 print(len(lines))
 print(lines[467])
-size=24
+size=12
 
 
 
 #"E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_48_4bands.txt"
-spetxt=open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_48_4bands.txt', 'w')
+spetxt=open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_24_4bands.txt', 'w')
 def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1,np2,np3,np4):
     gtiff_driver = gdal.GetDriverByName('GTiff')
     out_ds = gtiff_driver.Create(filename,
@@ -56,9 +56,9 @@ for i in range(0, int(len(lines) / 4)):
     bandVV = dsVV.GetRasterBand(1)
     speVV = bandVV.ReadAsArray()
 
-    write_img('E:\\ALOSPALSAR\\TrainData\\ALPSRP267211510\\ALPSRP267211510_spe_48_4bands\\'+'ALPSRP267211510_spe48_'+str(i)+'_4b_'+str(labelid)+'.tif',
+    write_img('E:\\ALOSPALSAR\\TrainData\\ALPSRP267211510\\ALPSRP267211510_spe_24_4bands\\'+'ALPSRP267211510_spe24_'+str(i)+'_4b_'+str(labelid)+'.tif',
               size,size,4,bandHH.DataType,speHH,speHV,speVH,speVV)
-    spetxt.write('E:\\ALOSPALSAR\\TrainData\\ALPSRP267211510\\ALPSRP267211510_spe_48_4bands\\'+'ALPSRP267211510_spe48_'+str(i)+'_4b_'+str(labelid)+'.tif'
+    spetxt.write('E:\\ALOSPALSAR\\TrainData\\ALPSRP267211510\\ALPSRP267211510_spe_24_4bands\\'+'ALPSRP267211510_spe24_'+str(i)+'_4b_'+str(labelid)+'.tif'
                  + ' ' + str(label))
 
 
