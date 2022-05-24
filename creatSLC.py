@@ -20,7 +20,7 @@ XYdata = np.loadtxt('E:\ALOSPALSAR\Greenland201101\\510\Data0509.txt', dtype=int
 label = np.loadtxt('E:\ALOSPALSAR\Greenland201101\\510\Data0509.txt', dtype=int, skiprows=6, usecols=(7))
 XYsize = np.ones_like(GCPdata[:, 0:2])
 
-RECT_SIZE = 24
+RECT_SIZE = 12
 # os.mkdir("1_size"+str(2*RECT_SIZE))
 XYul = XYdata - RECT_SIZE * XYsize
 XYdr = XYdata + RECT_SIZE * XYsize
@@ -65,7 +65,7 @@ def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1):
     out_band.WriteArray(np1)
     return
 
-labeltxt = open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48.txt', 'w')
+labeltxt = open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_24.txt', 'w')
 # print(tensor1)
 #E:\ALOSPALSAR\TrainData\ALPSRP267211510
 #ALPSRP267211510_SLC_48
@@ -75,17 +75,17 @@ for i in range(0, len(GCPdata)):
     nnpp3 = imgVH[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
     nnpp4 = imgVV[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
     labelid=label[i]
-    write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48' + '\\' + 'ALPSRP267211510_SLC_HH_' + str(i) + '_0509_'+str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
+    write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_24' + '\\' + 'ALPSRP267211510_SLC_HH_' + str(i) + '_0509_'+str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
               1, band1.DataType, nnpp1)
-    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48\\' + 'ALPSRP267211510_SLC_HH_' + str(i) + '_0509_'+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
-    write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48' + '\\' + 'ALPSRP267211510_SLC_HV_' + str(i) + '_0509_'+str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
+    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_24\\' + 'ALPSRP267211510_SLC_HH_' + str(i) + '_0509_'+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
+    write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_24' + '\\' + 'ALPSRP267211510_SLC_HV_' + str(i) + '_0509_'+str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
               1, band1.DataType, nnpp2)
-    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48\\' + 'ALPSRP267211510_SLC_HV_' + str(i) + '_0509_'+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
-    write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48' + '\\' + 'ALPSRP267211510_SLC_VH_' + str(i) + '_0509_' + str(labelid) + '.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
+    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_24\\' + 'ALPSRP267211510_SLC_HV_' + str(i) + '_0509_'+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
+    write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_24' + '\\' + 'ALPSRP267211510_SLC_VH_' + str(i) + '_0509_' + str(labelid) + '.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
               1, band1.DataType, nnpp3)
-    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48\\' + 'ALPSRP267211510_SLC_VH_' + str(i) + '_0509_' + str(labelid) + '.tif' + ' ' + str(labelid) + '\n')
-    write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48' + '\\' + 'ALPSRP267211510_SLC_VV_' + str(i) + '_0509_' + str(labelid) + '.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
+    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_24\\' + 'ALPSRP267211510_SLC_VH_' + str(i) + '_0509_' + str(labelid) + '.tif' + ' ' + str(labelid) + '\n')
+    write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_24' + '\\' + 'ALPSRP267211510_SLC_VV_' + str(i) + '_0509_' + str(labelid) + '.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
               1, band1.DataType, nnpp4)
-    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48\\' + 'ALPSRP267211510_SLC_VV_' + str(i) + '_0509_' + str(labelid) + '.tif' + ' ' + str(labelid) + '\n')
+    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_24\\' + 'ALPSRP267211510_SLC_VV_' + str(i) + '_0509_' + str(labelid) + '.tif' + ' ' + str(labelid) + '\n')
 
 labeltxt.close()

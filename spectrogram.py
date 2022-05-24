@@ -5,14 +5,14 @@ import cv2
 import matplotlib.pyplot as plt
 num=0
 #"E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48.txt"
-win_size=24
+win_size=12
 
 hamming_win = np.hamming(win_size)
 hamming_win_2d = np.sqrt(np.outer(hamming_win, hamming_win))
 
 #ALPSRP267211510_spectrogram_48
-imgtxt = open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48.txt', 'r')
-SLCtxt=open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_48.txt', 'w')
+imgtxt = open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_24.txt', 'r')
+SLCtxt=open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_24.txt', 'w')
 
 def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1):
     gtiff_driver = gdal.GetDriverByName('GTiff')
@@ -45,8 +45,8 @@ while True:
         for K in range(0, (x * y)):
             ff += spectrogram[K, :, :]
         ff = ff / (x * y)
-        cv2.imwrite('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_48'+'\\'+'ALPSRP267211510_SLC_'+str(num)+'_0517.tif',ff)
-        SLCtxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_48\ALPSRP267211510_SLC_'+str(num)+'_0517.tif'+' '+str(img_label))
+        cv2.imwrite('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_24'+'\\'+'ALPSRP267211510_SLC_'+str(num)+'_0517.tif',ff)
+        SLCtxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_24\ALPSRP267211510_SLC_'+str(num)+'_0517.tif'+' '+str(img_label))
         num=num+1
     else:
         break

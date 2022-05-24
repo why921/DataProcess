@@ -6,7 +6,7 @@ from img_statistics import ALPSRP205991510
 
 
 ST=ALPSRP205991510
-RECT_SIZE=24
+RECT_SIZE=12
 #"E:\ALOSPALSAR\Beaufort\91510\ALOS-P1_1__A-ORBIT__ALPSRP205991510_Cal_ML_Spk_Decomp.tif"
 #"E:\ALOSPALSAR\Beaufort\91510\ALOS-P1_1__A-ORBIT__ALPSRP205991510_Cal_ML.tif"
 
@@ -90,26 +90,33 @@ def write_slc(filename, XSIZE, YSIZE, Bands, DataType, np1,np2,np3,np4):
     out_band.WriteArray(np4)
     return
 #"E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli48.txt"
-label = open('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli48.txt', 'w',encoding='utf-8')
-labeltxt=open('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\slc48.txt', 'w',encoding='utf-8')
+label = open('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli24.txt', 'w',encoding='utf-8')
+labeltxt=open('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\slc24.txt', 'w',encoding='utf-8')
 #E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli48
 for i in range(500, 800):
     for j in range(100, 400):
-       # cut1 = im_data1[i:i + 48, j:j + 48]
-      #  cut2 = im_data2[i:i + 48, j:j + 48]
-       # cut3 = im_data3[i:i + 48, j:j + 48]
-        nnpp1 = imgHH[2*i:2*i + 48, 2*j:2*j + 48]
-        nnpp2 = imgHV[2*i:2*i + 48, 2*j:2*j + 48]
-        nnpp3 = imgVH[2*i:2*i + 48, 2*j:2*j + 48]
-        nnpp4 = imgVV[2*i:2*i + 48, 2*j:2*j + 48]
-       # write_img('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli48\\'+'test_'+str(i)+'and'+str(j)+'.tif', 2*RECT_SIZE, 2*RECT_SIZE, 3, band1.DataType,cut1,cut2,cut3)
-      #  label.write('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli48\\'+'test_'+str(i)+'and'+str(j)+'.tif'+' '+'0\n')
+        cut1 = im_data1[2*i:2*i + 2*RECT_SIZE, 2*j:2*j + 2*RECT_SIZE]
+        cut2 = im_data2[2*i:2*i + 2*RECT_SIZE, 2*j:2*j + 2*RECT_SIZE]
+        cut3 = im_data3[2*i:2*i + 2*RECT_SIZE, 2*j:2*j + 2*RECT_SIZE]
+
+        nnpp1 = imgHH[2*i:2*i + 2*RECT_SIZE, 2*j:2*j + 2*RECT_SIZE]
+        nnpp2 = imgHV[2*i:2*i + 2*RECT_SIZE, 2*j:2*j + 2*RECT_SIZE]
+        nnpp3 = imgVH[2*i:2*i + 2*RECT_SIZE, 2*j:2*j + 2*RECT_SIZE]
+        nnpp4 = imgVV[2*i:2*i + 2*RECT_SIZE, 2*j:2*j + 2*RECT_SIZE]
+
+
+        write_img('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli24\\'+'test_'+str(i)+'and'+str(j)+'.tif', 2*RECT_SIZE, 2*RECT_SIZE, 3, band1.DataType,cut1,cut2,cut3)
+        label.write('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli24\\'+'test_'+str(i)+'and'+str(j)+'.tif'+' '+'0\n')
+
         write_slc(
-            'E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\slc48' + '\\' + 'SLC_' + str(
+            'E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\slc24' + '\\' + 'SLC_' + str(
                 2*i) + '_' + str(2*j) + '.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,4, sband1.DataType, nnpp1,nnpp2,nnpp3,nnpp4)
+
         labeltxt.write(
-            'E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\slc48' + '\\' + 'SLC_' + str(
+            'E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\slc24' + '\\' + 'SLC_' + str(
                 2*i) + '_' + str(2*j) + '.tif' + ' ' + str(0) + '\n')
+
+
 
 
 label.close()

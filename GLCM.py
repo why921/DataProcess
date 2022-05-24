@@ -54,8 +54,12 @@ ds1 = gdal.Open(str(path1))
 band1 = ds1.GetRasterBand(1)
 spe1 = band1.ReadAsArray()
 img = np.array([spe1, spe1,spe1])
+DDSS=gdal.Open(r'E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli48\test_500and100.tif')
+band11 = DDSS.GetRasterBand(1)
+#"E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\slc48\SLC_1000_200.tif"
+#"E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli48\test_500and100.tif"
+print(band11.DataType)
 
-write_img('test.tif',24,24,3,band1.DataType,spe1,spe1,spe1)
 
 
 
