@@ -45,9 +45,9 @@ im_data1 = band1.ReadAsArray()  # 获取数据
 im_data2 = band2.ReadAsArray()  # 获取数据
 im_data3 = band3.ReadAsArray()  # 获取数据
 
-im_data1 = (im_data1 - (ST[0][0])) / ((ST[0][1]) - (ST[0][0]))
-im_data2 = (im_data2 - (ST[1][0])) / ((ST[1][1]) - (ST[1][0]))
-im_data3 = (im_data3 - (ST[2][0])) / ((ST[2][1]) - (ST[2][0]))
+im_data1 = (im_data1 - (im_data1.min())) / ((im_data1.max()) - (im_data1.min()))
+im_data2 = (im_data2 - (im_data2.min())) / ((im_data2.max()) - (im_data2.min()))
+im_data3 = (im_data3 - (im_data3.min())) / ((im_data3.max()) - (im_data3.min()))
 i = 2
 cropped1 = im_data1[32:80, 131:179]
 cropped2 = im_data2[XYul[0][0]:XYdr[0][0], XYul[0][1]:XYdr[0][1]]
