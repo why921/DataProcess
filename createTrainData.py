@@ -18,7 +18,7 @@ from img_statistics import ALPSRP267211510
 
 # E:\ALOSPALSAR\Greenland201101\510
 ST=ALPSRP267211510
-
+SLCtxt=open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_24.txt', 'w')
 GCPdata = np.loadtxt('E:\ALOSPALSAR\Greenland201101\\510\Data0509.txt', dtype=int, skiprows=6, usecols=(1, 2, 7))
 XYdata = np.loadtxt('E:\ALOSPALSAR\Greenland201101\\510\Data0509.txt', dtype=int, skiprows=6, usecols=(1, 2))
 label = np.loadtxt('E:\ALOSPALSAR\Greenland201101\\510\Data0509.txt', dtype=int, skiprows=6, usecols=(7))
