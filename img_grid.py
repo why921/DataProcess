@@ -15,7 +15,8 @@ from torchvision.utils import make_grid
 
 win_size=12
 num=0
-hamming_win = np.hamming(win_size)
+#bartlett hanning hamming kaiser
+hamming_win = np.kaiser(win_size,4)
 hamming_win_2d = np.sqrt(np.outer(hamming_win, hamming_win))
 #E:\DataSetProcess\gtxt.txt
 gtxt=open('E:\DataSetProcess\gtxt.txt', 'w')
@@ -31,8 +32,9 @@ def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1):
     out_band = out_ds.GetRasterBand(1)
     out_band.WriteArray(np1)
     return
-
-ds = gdal.Open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_24\ALPSRP267211510_SLC_HH_0_0509_0.tif')
+#"E:\ALOSPALSAR\imgshow\Beaufort91510SLC\ALPSRP267211510_SLC_HH_0_0509_2.tif"
+#"E:\ALOSPALSAR\imgshow\Beaufort51550SLC\ALPSRP267211510_SLC_HH_0_0509_2.tif"
+ds = gdal.Open('E:\ALOSPALSAR\imgshow\Beaufort51550SLC\ALPSRP267211510_SLC_HH_0_0509_2.tif')
 band1 = ds.GetRasterBand(1)
 slc_data1 = band1.ReadAsArray()
 
@@ -45,12 +47,13 @@ for i in range(0, win_size):
                                                         shape=[win_size, win_size])
 spectrogram = np.log(1 + np.abs(spectrogram))
 x, y, fr, fa = spectrogram.shape
-spectrogram = spectrogram.reshape([x * y, fr, fa])
+spectrogram = spectrogram.reshape([x *y, fr, fa])
 IMG=[]
 for K in range(0, (x * y)):
     ff += spectrogram[K, :, :]
-    #cv2.imwrite('E:\DataSetProcess\grid' + '\\' + 'img_' + str(num) + '.jpg', ff)
-    gtxt.write('E:\DataSetProcess\grid' + '\\' + 'img_' + str(num) + '.tif'+' '+str(0)+'\n')
+    #E:\ALOSPALSAR\imgshow\temp
+    cv2.imwrite('E:\ALOSPALSAR\imgshow\\temp' + '\\' + 'img_' + str(num) + '.tif', ff)
+    gtxt.write('E:\ALOSPALSAR\imgshow\\temp' + '\\' + 'img_' + str(num) + '.tif'+' '+str(0)+'\n')
     num=num+1
 gtxt.close()
 
@@ -89,17 +92,14 @@ data_transforms = transforms.Compose([
 
 ddss = gridDataset(labeltxt='E:\DataSetProcess\gtxt.txt',transform=data_transforms)
 ddss.__init__(labeltxt='E:\DataSetProcess\gtxt.txt',transform=data_transforms)
-print(ddss.__len__())
-img, gt = ddss.__getitem__(2) # get the 34th sample
-print(type(img))
-print(img)
-print(gt)
+
+
 dataloader = torch.utils.data.DataLoader(ddss,
                                     batch_size=144, # 批量大小
                                     shuffle=False # 多进程
                                      )
 xxx, label = iter(dataloader).next()
-print(xxx)
+
 print('xxx:', xxx.shape, 'label:', label.shape)
 show(make_grid(xxx, nrow=12, padding=0))
 torchvision.utils.save_image(xxx, 'test.png', nrow=12, padding=0)
