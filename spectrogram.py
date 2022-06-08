@@ -2,17 +2,25 @@ import numpy as np
 from osgeo import gdal
 from scipy import fftpack
 import cv2
-import matplotlib.pyplot as plt
+
+
 num=0
 #"E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48.txt"
+#"E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_SLC_24.txt"
 win_size=12
 
 hamming_win = np.hamming(win_size)
 hamming_win_2d = np.sqrt(np.outer(hamming_win, hamming_win))
 
-#ALPSRP267211510_spectrogram_48
-imgtxt = open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_24.txt', 'r')
-SLCtxt=open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_24.txt', 'w')
+sar='ALPSRP180031440'
+date='_0608_'
+path='E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_spe_24\\ALPSRP180031440_'
+SLCtxt_path='E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_SLC_24.txt'
+spetxt_path='E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_spe_24.txt'
+
+
+SLCtxt = open(SLCtxt_path, 'r')
+spetxt=open(spetxt_path, 'w')
 
 def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1):
     gtiff_driver = gdal.GetDriverByName('GTiff')
@@ -21,11 +29,10 @@ def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1):
     out_band = out_ds.GetRasterBand(1)
     out_band.WriteArray(np1)
     return
-#write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48' + '\\' + 'ALPSRP267211510_SLC_VV_' + str(i) + '_0509_' + str(labelid) + '.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
-        #      3, band1.DataType, nnpp4)
+
 
 while True:
-    line = imgtxt.readline()
+    line = SLCtxt.readline()
     if line:
         img_path=line.split(" ")[0]
         img_label=line.split(" ")[1]
@@ -43,12 +50,13 @@ while True:
         x, y, fr, fa = spectrogram.shape
         spectrogram = spectrogram.reshape([x * y, fr, fa])
         for K in range(0, (x * y)):
-            ff += spectrogram[K, :, :]
+            ff = spectrogram[K, :, :]
+            ff += (ff - (ff.min())) / ((ff.max()) - (ff.min()))
         ff = ff / (x * y)
-        cv2.imwrite('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_24'+'\\'+'ALPSRP267211510_SLC_'+str(num)+'_0517.tif',ff)
-        SLCtxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_24\ALPSRP267211510_SLC_'+str(num)+'_0517.tif'+' '+str(img_label))
+        cv2.imwrite(path+'spe_'+str(num)+'.tif',ff)
+        spetxt.write(path+'spe_'+str(num)+'.tif'+' '+str(img_label))
         num=num+1
     else:
         break
-imgtxt.close()
 SLCtxt.close()
+spetxt.close()
