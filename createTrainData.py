@@ -3,13 +3,13 @@ from osgeo import gdal
 
 
 
-#"E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_24.txt"
-sar='ALPSRP180031440'
+sar='ALPSRP258351550'
 date='_0608_'
-path='E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_24\\ALPSRP180031440_'
-img_path='E:\ALOSPALSAR\Beaufort\\31440\\ALOS-P1_1__A-ORBIT__ALPSRP180031440_Cal_ML_Spk_Decomp.tif'
-label_path='E:\ALOSPALSAR\Beaufort\\31440\GCPALPSRP180031440.txt'
-txt_path='E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_24.txt'
+path='E:\ALOSPALSAR\TrainData'
+
+img_path='E:\ALOSPALSAR\Beaufort\\51550\\ALOS-P1_1__A-ORBIT__ALPSRP258351550_Cal_ML_Spk_Decomp.tif'
+label_path='E:\ALOSPALSAR\Beaufort\\51550\Data51550.txt'
+
 
 
 GCPdata = np.loadtxt(label_path, dtype=int, skiprows=6, usecols=(1, 2, 7))
@@ -58,16 +58,16 @@ def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1, np2, np3):
     out_band.WriteArray(np3)
     return
 
-labeltxt = open(txt_path, 'w')
+labeltxt = open(path+'\\'+sar+'\\'+sar+'_24.txt', 'w')
 
 for i in range(0, len(GCPdata)):
     nnpp1 = im_data1[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
     nnpp2 = im_data2[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
     nnpp3 = im_data3[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
     labelid=label[i]
-    write_img(path + str(i) + str(date)+str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
+    write_img(path+'\\'+sar+'\\'+sar+'_24\\'+sar+'_' + str(i) + str(date)+str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
              3, band1.DataType, nnpp1, nnpp2, nnpp3)
-    labeltxt.write(path + str(i) + str(date)+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
+    labeltxt.write(path+'\\'+sar+'\\'+sar+'_24\\'+sar+'_' + str(i) + str(date)+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
 
 labeltxt.close()
 

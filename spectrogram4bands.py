@@ -1,18 +1,18 @@
 from osgeo import gdal
 from creatSLC import img_path
+from createTrainData import sar
 
 
-#"E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_spe_24_4bands.txt"
-path='E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_spe_24_4bands\\ALPSRP267211510_spe24_'
-spe_path='E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_spe_24.txt'
-spe4b_path='E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_spe_24_4bands.txt'
+path='E:\ALOSPALSAR\TrainData'
+spe_path='E:\ALOSPALSAR\TrainData\ALPSRP258351550\ALPSRP258351550_spe_24.txt'
+spe4b_path='E:\ALOSPALSAR\TrainData\ALPSRP258351550\ALPSRP258351550_spe_24_4bands.txt'
 
 
 
 ds = gdal.Open(img_path)
 
-spectrogramtxt = open(spe_path, 'r')
-spe4btxt=open(spe4b_path, 'w')
+spectrogramtxt = open(path+'\\'+sar+'\\'+sar+'_spe_24.txt', 'r')
+spe4btxt=open(path+'\\'+sar+'\\'+sar+'_spe_24_4bands.txt', 'w')
 
 lines = spectrogramtxt.readlines()
 
@@ -60,7 +60,7 @@ for i in range(0, int(len(lines) / 4)):
     bandVV = dsVV.GetRasterBand(1)
     speVV = bandVV.ReadAsArray()
 
-    write_img(path+str(i)+'_4b_'+str(labelid)+'.tif',size,size,4,bandHH.DataType,speHH,speHV,speVH,speVV)
-    spe4btxt.write(path+str(i)+'_4b_'+str(labelid)+'.tif'+ ' ' + str(label))
+    write_img(path+'\\'+sar+'\\'+sar+'_spe_24_4bands\\'+sar+'_spe24_'+str(i)+'_4b_'+str(labelid)+'.tif',size,size,4,bandHH.DataType,speHH,speHV,speVH,speVV)
+    spe4btxt.write(path+'\\'+sar+'\\'+sar+'_spe_24_4bands\\'+sar+'_spe24_'+str(i)+'_4b_'+str(labelid)+'.tif'+ ' ' + str(label))
 
 spe4btxt.close()

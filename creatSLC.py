@@ -1,14 +1,12 @@
 import numpy as np
 from osgeo import gdal
+from createTrainData import label_path
+from createTrainData import sar
 
-#"E:\ALOSPALSAR\Beaufort\31440\ALOS-P1_1__A-ORBIT__ALPSRP180031440_Cal_ML.tif"
 
-sar='ALPSRP180031440'
-date='_0608_'
-path='E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_24\\ALPSRP180031440_SLC_'
-img_path='E:\ALOSPALSAR\Beaufort\\31440\ALOS-P1_1__A-ORBIT__ALPSRP180031440_Cal_ML.tif'
-label_path='E:\ALOSPALSAR\Beaufort\\31440\GCPALPSRP180031440.txt'
-txt_path='E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_SLC_24.txt'
+path='E:\ALOSPALSAR\TrainData'
+img_path='E:\ALOSPALSAR\Beaufort\\51550\ALOS-P1_1__A-ORBIT__ALPSRP258351550_Cal_ML.tif'
+txt_path='E:\ALOSPALSAR\TrainData\ALPSRP258351550\ALPSRP258351550_SLC_24.txt'
 
 
 GCPdata = np.loadtxt(label_path, dtype=int, skiprows=6, usecols=(1, 2, 7))
@@ -69,17 +67,17 @@ for i in range(0, len(GCPdata)):
     nnpp3 = imgVH[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
     nnpp4 = imgVV[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
     labelid=label[i]
-    write_img(path+'HH_' + str(i) + date + str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
+    write_img(path+'\\'+sar+'\\'+sar+'_24\\'+sar+'_SLC_'+'HH_' + str(i) + date + str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
               1, band1.DataType, nnpp1)
-    labeltxt.write(path+'HH_' + str(i) + date + str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
-    write_img(path+'HV_' + str(i) + date + str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
+    labeltxt.write(path+'\\'+sar+'\\'+sar+'_24\\'+sar+'_SLC_'+'HH_' + str(i) + date + str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
+    write_img(path+'\\'+sar+'\\'+sar+'_24\\'+sar+'_SLC_'+'HV_' + str(i) + date + str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
               1, band1.DataType, nnpp2)
-    labeltxt.write(path+'HV_' + str(i) + date + str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
-    write_img(path+'VH_' + str(i) + date + str(labelid) + '.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
+    labeltxt.write(path+'\\'+sar+'\\'+sar+'_24\\'+sar+'_SLC_'+'HV_' + str(i) + date + str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
+    write_img(path+'\\'+sar+'\\'+sar+'_24\\'+sar+'_SLC_'+'VH_' + str(i) + date + str(labelid) + '.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
               1, band1.DataType, nnpp3)
-    labeltxt.write(path+'VH_' + str(i) + date + str(labelid) + '.tif' + ' ' + str(labelid) + '\n')
-    write_img(path+'VV_' + str(i) + date + str(labelid) + '.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
+    labeltxt.write(path+'\\'+sar+'\\'+sar+'_24\\'+sar+'_SLC_'+'VH_' + str(i) + date + str(labelid) + '.tif' + ' ' + str(labelid) + '\n')
+    write_img(path+'\\'+sar+'\\'+sar+'_24\\'+sar+'_SLC_'+'VV_' + str(i) + date + str(labelid) + '.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
               1, band1.DataType, nnpp4)
-    labeltxt.write(path+'VV_' + str(i) + date + str(labelid) + '.tif' + ' ' + str(labelid) + '\n')
+    labeltxt.write(path+'\\'+sar+'\\'+sar+'_24\\'+sar+'_SLC_'+'VV_' + str(i) + date + str(labelid) + '.tif' + ' ' + str(labelid) + '\n')
 
 labeltxt.close()
