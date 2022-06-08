@@ -1,37 +1,29 @@
 import numpy as np
-import os
-import torch
 from osgeo import gdal
-from skimage import data
-import skimage.io
-import skimage.feature
-import skimage.color
-import skimage.transform
-import skimage.util
-import skimage.segmentation
 
-import cv2
-import matplotlib.pyplot as plt
-from torchvision.utils import make_grid
-from torchvision.utils import save_image
-from img_statistics import ALPSRP267211510
 
-# E:\ALOSPALSAR\Greenland201101\510
-ST=ALPSRP267211510
-SLCtxt=open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_spe_24.txt', 'w')
-GCPdata = np.loadtxt('E:\ALOSPALSAR\Greenland201101\\510\Data0509.txt', dtype=int, skiprows=6, usecols=(1, 2, 7))
-XYdata = np.loadtxt('E:\ALOSPALSAR\Greenland201101\\510\Data0509.txt', dtype=int, skiprows=6, usecols=(1, 2))
-label = np.loadtxt('E:\ALOSPALSAR\Greenland201101\\510\Data0509.txt', dtype=int, skiprows=6, usecols=(7))
+
+#"E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_24.txt"
+sar='ALPSRP180031440'
+date='_0608_'
+path='E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_24\\ALPSRP180031440_'
+img_path='E:\ALOSPALSAR\Beaufort\\31440\\ALOS-P1_1__A-ORBIT__ALPSRP180031440_Cal_ML_Spk_Decomp.tif'
+label_path='E:\ALOSPALSAR\Beaufort\\31440\GCPALPSRP180031440.txt'
+txt_path='E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_24.txt'
+
+
+GCPdata = np.loadtxt(label_path, dtype=int, skiprows=6, usecols=(1, 2, 7))
+XYdata = np.loadtxt(label_path, dtype=int, skiprows=6, usecols=(1, 2))
+label = np.loadtxt(label_path, dtype=int, skiprows=6, usecols=(7))
 XYsize = np.ones_like(GCPdata[:, 0:2])
 
 RECT_SIZE = 12
-# os.mkdir("1_size"+str(2*RECT_SIZE))
+
 XYul = XYdata - RECT_SIZE * XYsize
 XYdr = XYdata + RECT_SIZE * XYsize
 
-# ALOS-P1_1__A-ORBIT__ALPSRP256411570_Cal_ML_Spk_Decomppauli
-#"E:\ALOSPALSAR\Greenland201101\510\ALOS-P1_1__A-ORBIT__ALPSRP267211510_Cal_ML_Spk_Decomppauli.tif"
-ds = gdal.Open(r'E:\ALOSPALSAR\Greenland201101\510\ALOS-P1_1__A-ORBIT__ALPSRP267211510_Cal_ML_Spk_Decomppauli.tif')
+
+ds = gdal.Open(img_path)
 
 rows = ds.RasterYSize
 cols = ds.RasterXSize
@@ -41,22 +33,14 @@ band1 = ds.GetRasterBand(1)
 band2 = ds.GetRasterBand(2)
 band3 = ds.GetRasterBand(3)
 
-im_data1 = band1.ReadAsArray()  # 获取数据
-im_data2 = band2.ReadAsArray()  # 获取数据
-im_data3 = band3.ReadAsArray()  # 获取数据
+im_data1 = band1.ReadAsArray()
+im_data2 = band2.ReadAsArray()
+im_data3 = band3.ReadAsArray()
 
 im_data1 = (im_data1 - (im_data1.min())) / ((im_data1.max()) - (im_data1.min()))
 im_data2 = (im_data2 - (im_data2.min())) / ((im_data2.max()) - (im_data2.min()))
 im_data3 = (im_data3 - (im_data3.min())) / ((im_data3.max()) - (im_data3.min()))
-i = 2
-cropped1 = im_data1[32:80, 131:179]
-cropped2 = im_data2[XYul[0][0]:XYdr[0][0], XYul[0][1]:XYdr[0][1]]
-cropped3 = im_data3[XYul[0][0]:XYdr[0][0], XYul[0][1]:XYdr[0][1]]
 
-print(XYul, XYdr)
-plt.imshow(cropped1)
-plt.xticks([]), plt.yticks([])  # 不显示坐标轴
-plt.show()
 
 
 def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1, np2, np3):
@@ -74,19 +58,16 @@ def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1, np2, np3):
     out_band.WriteArray(np3)
     return
 
-#"E:\ALOSPALSAR\TrainData\ALPSRP267211510.txt"
-labeltxt = open('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_24.txt', 'w')
-# print(tensor1)
-#E:\ALOSPALSAR\TrainData\ALPSRP267211510
+labeltxt = open(txt_path, 'w')
+
 for i in range(0, len(GCPdata)):
     nnpp1 = im_data1[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
     nnpp2 = im_data2[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
     nnpp3 = im_data3[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
-
     labelid=label[i]
-    write_img('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_24' + '\\' + 'ALPSRP267211510_' + str(i) + '_0509_'+str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
+    write_img(path + str(i) + str(date)+str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
              3, band1.DataType, nnpp1, nnpp2, nnpp3)
-    labeltxt.write('E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_24\\' + 'ALPSRP267211510_' + str(i) + '_0509_'+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
+    labeltxt.write(path + str(i) + str(date)+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
 
 labeltxt.close()
 
