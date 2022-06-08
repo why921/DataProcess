@@ -2,7 +2,7 @@ import numpy as np
 from osgeo import gdal
 from createTrainData import label_path
 from createTrainData import sar
-
+from createTrainData import date
 
 path='E:\ALOSPALSAR\TrainData'
 img_path='E:\ALOSPALSAR\Beaufort\\51550\ALOS-P1_1__A-ORBIT__ALPSRP258351550_Cal_ML.tif'
