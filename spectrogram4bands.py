@@ -4,9 +4,6 @@ from createTrainData import SLC_img_path
 
 
 path='E:\ALOSPALSAR\TrainData'
-spe_path='E:\ALOSPALSAR\TrainData\ALPSRP258351550\ALPSRP258351550_spe_24.txt'
-spe4b_path='E:\ALOSPALSAR\TrainData\ALPSRP258351550\ALPSRP258351550_spe_24_4bands.txt'
-
 
 
 ds = gdal.Open(SLC_img_path)
