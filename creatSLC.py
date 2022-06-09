@@ -3,10 +3,10 @@ from osgeo import gdal
 from createTrainData import label_path
 from createTrainData import sar
 from createTrainData import date
+from createTrainData import SLC_img_path
 
 path='E:\ALOSPALSAR\TrainData'
-img_path='E:\ALOSPALSAR\Beaufort\\51570\ALOS-P1_1__A-ORBIT__ALPSRP258351570_Cal_ML.tif'
-#"E:\ALOSPALSAR\Beaufort\51570\ALOS-P1_1__A-ORBIT__ALPSRP258351570_Cal_ML.tif"
+
 
 
 GCPdata = np.loadtxt(label_path, dtype=int, skiprows=6, usecols=(1, 2, 7))
@@ -19,7 +19,7 @@ RECT_SIZE = 12
 XYul = XYdata - RECT_SIZE * XYsize
 XYdr = XYdata + RECT_SIZE * XYsize
 
-ds = gdal.Open(img_path)
+ds = gdal.Open(SLC_img_path)
 
 rows = ds.RasterYSize
 cols = ds.RasterXSize

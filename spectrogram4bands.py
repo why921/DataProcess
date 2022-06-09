@@ -1,6 +1,6 @@
 from osgeo import gdal
-from creatSLC import img_path
 from createTrainData import sar
+from createTrainData import SLC_img_path
 
 
 path='E:\ALOSPALSAR\TrainData'
@@ -9,7 +9,7 @@ spe4b_path='E:\ALOSPALSAR\TrainData\ALPSRP258351550\ALPSRP258351550_spe_24_4band
 
 
 
-ds = gdal.Open(img_path)
+ds = gdal.Open(SLC_img_path)
 
 spectrogramtxt = open(path+'\\'+sar+'\\'+sar+'_spe_24.txt', 'r')
 spe4btxt=open(path+'\\'+sar+'\\'+sar+'_spe_24_4bands.txt', 'w')
