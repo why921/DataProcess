@@ -52,8 +52,9 @@ while True:
             ff = spectrogram[K, :, :]
             ff += (ff - (ff.min())) / ((ff.max()) - (ff.min()))
         ff = ff / (x * y)
-        cv2.imwrite(path+'spe_'+str(num)+'.tif',ff)
-        spetxt.write(path+'spe_'+str(num)+'.tif'+' '+str(img_label))
+        cv2.imwrite(path+'\\'+sar+'\\'+sar+'_spe_24\\'+sar+'spe_'+str(num)+'.tif',ff)
+        #path+'\\'+sar+'\\'+sar+'_24\\'+sar+
+        spetxt.write(path+'\\'+sar+'\\'+sar+'_spe_24\\'+sar+'spe_'+str(num)+'.tif'+' '+str(img_label))
         num=num+1
     else:
         break

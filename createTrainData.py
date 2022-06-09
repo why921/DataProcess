@@ -3,12 +3,16 @@ from osgeo import gdal
 
 
 
-sar='ALPSRP258351550'
+
+sar='ALPSRP258351570'
 date='_0608_'
 path='E:\ALOSPALSAR\TrainData'
 
-img_path='E:\ALOSPALSAR\Beaufort\\51550\\ALOS-P1_1__A-ORBIT__ALPSRP258351550_Cal_ML_Spk_Decomp.tif'
-label_path='E:\ALOSPALSAR\Beaufort\\51550\Data51550.txt'
+
+#"E:\ALOSPALSAR\Beaufort\51570\ALOS-P1_1__A-ORBIT__ALPSRP258351570_Cal_ML_Spk_Decomp.tif"
+#"E:\ALOSPALSAR\Beaufort\51570\GCPALPSRP258351570.txt"
+img_path='E:\ALOSPALSAR\Beaufort\\51570\ALOS-P1_1__A-ORBIT__ALPSRP258351570_Cal_ML_Spk_Decomp.tif'
+label_path='E:\ALOSPALSAR\Beaufort\\51570\GCPALPSRP258351570.txt'
 
 
 
