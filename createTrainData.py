@@ -4,23 +4,19 @@ from osgeo import gdal
 
 
 
-sar='ALPSRP205991520'
-date='_0609_'
+sar='ALPSRP277371560'
+date='_0615_'
 path='E:\ALOSPALSAR\TrainData'
 
 
 '''
-"E:\ALOSPALSAR\Beaufort\91500\ALOS-P1_1__A-ORBIT__ALPSRP205991500_Cal_ML_Spk_Decomp.tif"
-"E:\ALOSPALSAR\Beaufort\91500\ALOS-P1_1__A-ORBIT__ALPSRP205991500_Cal_ML.tif"
-"E:\ALOSPALSAR\Beaufort\91500\GCPALPSRP205991500.txt"
-"E:\ALOSPALSAR\Beaufort\71400\GCPALPSRP233871400.txt"
-"E:\ALOSPALSAR\Beaufort\71400\ALOS-P1_1__A-ORBIT__ALPSRP233871400_Cal_ML_Spk_Decomp.tif"
-"E:\ALOSPALSAR\Beaufort\71400\ALOS-P1_1__A-ORBIT__ALPSRP233871400_Cal_ML.tif"
+"E:\ALOSPALSAR\Greenland_w\460\GCPALPSRP171831460.txt"
+"E:\ALOSPALSAR\SevernayaZemlya\01570\ALOS-P1_1__A-ORBIT__ALPSRP274601570_Cal_ML_Spk_Decomp.tif"
 '''
-img_path='E:\ALOSPALSAR\Beaufort\\71400\ALOS-P1_1__A-ORBIT__ALPSRP233871400_Cal_ML_Spk_Decomp.tif'
-SLC_img_path='E:\ALOSPALSAR\Beaufort\\71400\ALOS-P1_1__A-ORBIT__ALPSRP233871400_Cal_ML.tif'
-label_path='E:\ALOSPALSAR\Beaufort\\71400\GCPALPSRP233871400.txt'
 
+img_path='E:\ALOSPALSAR\SevernayaZemlya\\71560\ALOS-P1_1__A-ORBIT__ALPSRP277371560_Cal_ML_Spk_Decomp.tif'
+SLC_img_path='E:\ALOSPALSAR\SevernayaZemlya\\71560\ALOS-P1_1__A-ORBIT__ALPSRP277371560_Cal_ML.tif'
+label_path='E:\ALOSPALSAR\SevernayaZemlya\\71560\GCPALPSRP277371560.txt'
 
 
 GCPdata = np.loadtxt(label_path, dtype=int, skiprows=6, usecols=(1, 2, 7))

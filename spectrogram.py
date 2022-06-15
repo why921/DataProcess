@@ -14,8 +14,7 @@ hamming_win_2d = np.sqrt(np.outer(hamming_win, hamming_win))
 
 date='_0608_'
 path='E:\ALOSPALSAR\TrainData'
-SLCtxt_path='E:\ALOSPALSAR\TrainData\ALPSRP258351550\ALPSRP258351550_SLC_24.txt'
-spetxt_path='E:\ALOSPALSAR\TrainData\ALPSRP258351550\ALPSRP258351550_spe_24.txt'
+
 
 
 SLCtxt = open(path+'\\'+sar+'\\'+sar+'_SLC_24.txt', 'r')
