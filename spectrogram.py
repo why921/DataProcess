@@ -3,11 +3,11 @@ from osgeo import gdal
 from scipy import fftpack
 import cv2
 from createTrainData import sar
-
+from createTrainData import RECT_SIZE
 num=0
 #"E:\ALOSPALSAR\TrainData\ALPSRP267211510\ALPSRP267211510_SLC_48.txt"
 #"E:\ALOSPALSAR\TrainData\ALPSRP180031440\ALPSRP180031440_SLC_24.txt"
-win_size=12
+win_size=RECT_SIZE
 
 hamming_win = np.hamming(win_size)
 hamming_win_2d = np.sqrt(np.outer(hamming_win, hamming_win))
@@ -17,8 +17,8 @@ path='E:\ALOSPALSAR\TrainData'
 
 
 
-SLCtxt = open(path+'\\'+sar+'\\'+sar+'_SLC_24.txt', 'r')
-spetxt=open(path+'\\'+sar+'\\'+sar+'_spe_24.txt', 'w')
+SLCtxt = open(path+'\\'+sar+'\\'+sar+'_SLC_'+str(2*RECT_SIZE)+'.txt', 'r')
+spetxt=open(path+'\\'+sar+'\\'+sar+'_spe_'+str(2*RECT_SIZE)+'.txt', 'w')
 
 def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1):
     gtiff_driver = gdal.GetDriverByName('GTiff')

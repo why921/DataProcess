@@ -3,6 +3,7 @@ from osgeo import gdal
 
 
 
+RECT_SIZE = 12
 
 sar='ALPSRP277371560'
 date='_0615_'
@@ -24,7 +25,7 @@ XYdata = np.loadtxt(label_path, dtype=int, skiprows=6, usecols=(1, 2))
 label = np.loadtxt(label_path, dtype=int, skiprows=6, usecols=(7))
 XYsize = np.ones_like(GCPdata[:, 0:2])
 
-RECT_SIZE = 12
+
 
 XYul = XYdata - RECT_SIZE * XYsize
 XYdr = XYdata + RECT_SIZE * XYsize
@@ -65,16 +66,16 @@ def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1, np2, np3):
     out_band.WriteArray(np3)
     return
 
-labeltxt = open(path+'\\'+sar+'\\'+sar+'_24.txt', 'w')
+labeltxt = open(path+'\\'+sar+'\\'+sar+'_'+str(2*RECT_SIZE)+'.txt', 'w')
 
 for i in range(0, len(GCPdata)):
     nnpp1 = im_data1[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
     nnpp2 = im_data2[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
     nnpp3 = im_data3[XYul[i][1]:XYdr[i][1], XYul[i][0]:XYdr[i][0]]
     labelid=label[i]
-    write_img(path+'\\'+sar+'\\'+sar+'_24\\'+sar+'_' + str(i) + str(date)+str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
+    write_img(path+'\\'+sar+'\\'+sar+'_'+str(2*RECT_SIZE)+'\\'+sar+'_' + str(i) + str(date)+str(labelid)+'.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,
              3, band1.DataType, nnpp1, nnpp2, nnpp3)
-    labeltxt.write(path+'\\'+sar+'\\'+sar+'_24\\'+sar+'_' + str(i) + str(date)+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
+    labeltxt.write(path+'\\'+sar+'\\'+sar+'_'+str(2*RECT_SIZE)+'\\'+sar+'_' + str(i) + str(date)+str(labelid)+'.tif' + ' ' + str(labelid)+'\n')
 
 labeltxt.close()
 

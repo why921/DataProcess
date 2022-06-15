@@ -1,19 +1,19 @@
 from osgeo import gdal
 from createTrainData import sar
 from createTrainData import SLC_img_path
-
+from createTrainData import RECT_SIZE
 
 path='E:\ALOSPALSAR\TrainData'
 
 
 ds = gdal.Open(SLC_img_path)
 
-spectrogramtxt = open(path+'\\'+sar+'\\'+sar+'_spe_24.txt', 'r')
-spe4btxt=open(path+'\\'+sar+'\\'+sar+'_spe_24_4bands.txt', 'w')
+spectrogramtxt = open(path+'\\'+sar+'\\'+sar+'_spe_'+str(2*RECT_SIZE)+'.txt', 'r')
+spe4btxt=open(path+'\\'+sar+'\\'+sar+'_spe_'+str(2*RECT_SIZE)+'_4bands.txt', 'w')
 
 lines = spectrogramtxt.readlines()
 
-size=12
+size=RECT_SIZE
 
 
 
@@ -57,7 +57,7 @@ for i in range(0, int(len(lines) / 4)):
     bandVV = dsVV.GetRasterBand(1)
     speVV = bandVV.ReadAsArray()
 
-    write_img(path+'\\'+sar+'\\'+sar+'_spe_24_4bands\\'+sar+'_spe24_'+str(i)+'_4b_'+str(labelid)+'.tif',size,size,4,bandHH.DataType,speHH,speHV,speVH,speVV)
-    spe4btxt.write(path+'\\'+sar+'\\'+sar+'_spe_24_4bands\\'+sar+'_spe24_'+str(i)+'_4b_'+str(labelid)+'.tif'+ ' ' + str(label))
+    write_img(path+'\\'+sar+'\\'+sar+'_spe_'+str(2*RECT_SIZE)+'_4bands\\'+sar+'_spe'+str(2*RECT_SIZE)+'_'+str(i)+'_4b_'+str(labelid)+'.tif',size,size,4,bandHH.DataType,speHH,speHV,speVH,speVV)
+    spe4btxt.write(path+'\\'+sar+'\\'+sar+'_spe_'+str(2*RECT_SIZE)+'_4bands\\'+sar+'_spe'+str(2*RECT_SIZE)+'_'+str(i)+'_4b_'+str(labelid)+'.tif'+ ' ' + str(label))
 
 spe4btxt.close()
