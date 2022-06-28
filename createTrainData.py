@@ -5,19 +5,20 @@ from osgeo import gdal
 
 RECT_SIZE = 12
 
-sar='ALPSRP277371560'
-date='_0615_'
+sar='ALPSRP205991510'
+date='_0617_'
 path='E:\ALOSPALSAR\TrainData'
 
 
 '''
 "E:\ALOSPALSAR\Greenland_w\460\GCPALPSRP171831460.txt"
 "E:\ALOSPALSAR\SevernayaZemlya\01570\ALOS-P1_1__A-ORBIT__ALPSRP274601570_Cal_ML_Spk_Decomp.tif"
+
 '''
 
-img_path='E:\ALOSPALSAR\SevernayaZemlya\\71560\ALOS-P1_1__A-ORBIT__ALPSRP277371560_Cal_ML_Spk_Decomp.tif'
-SLC_img_path='E:\ALOSPALSAR\SevernayaZemlya\\71560\ALOS-P1_1__A-ORBIT__ALPSRP277371560_Cal_ML.tif'
-label_path='E:\ALOSPALSAR\SevernayaZemlya\\71560\GCPALPSRP277371560.txt'
+img_path='E:\ALOSPALSAR\Beaufort\\91510\ALOS-P1_1__A-ORBIT__ALPSRP205991510_Cal_ML_Spk_Decomp.tif'
+SLC_img_path='E:\ALOSPALSAR\Beaufort\\91510\ALOS-P1_1__A-ORBIT__ALPSRP205991510_Cal_ML.tif'
+label_path='E:\ALOSPALSAR\Beaufort\\91510\Data0617test.txt'
 
 
 GCPdata = np.loadtxt(label_path, dtype=int, skiprows=6, usecols=(1, 2, 7))

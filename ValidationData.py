@@ -5,12 +5,17 @@ from osgeo import gdal
 from img_statistics import ALPSRP205991510
 
 
-ST=ALPSRP205991510
-RECT_SIZE=12
+sar='ALPSRP201761520'
+RECT_SIZE=24
 #"E:\ALOSPALSAR\Beaufort\91510\ALOS-P1_1__A-ORBIT__ALPSRP205991510_Cal_ML_Spk_Decomp.tif"
 #"E:\ALOSPALSAR\Beaufort\91510\ALOS-P1_1__A-ORBIT__ALPSRP205991510_Cal_ML.tif"
 
-ds = gdal.Open(r'E:\ALOSPALSAR\Beaufort\91510\ALOS-P1_1__A-ORBIT__ALPSRP205991510_Cal_ML_Spk_Decomp.tif')
+#"E:\ALOSPALSAR\Beaufort\61520\ALOS-P1_1__A-ORBIT__ALPSRP201761520_Cal_ML_Spk_Decomp.tif"
+ds = gdal.Open(r'E:\ALOSPALSAR\Beaufort\61520\ALOS-P1_1__A-ORBIT__ALPSRP201761520_Cal_ML_Spk_Decomp.tif')
+slc = gdal.Open(r'E:\ALOSPALSAR\Beaufort\61520\ALOS-P1_1__A-ORBIT__ALPSRP201761520_Cal_ML.tif')
+
+label = open('E:\ALOSPALSAR\ValidationData'+'\\'+sar+'\\pauli'+str(2*RECT_SIZE)+'.txt', 'w',encoding='utf-8')
+labeltxt=open('E:\ALOSPALSAR\ValidationData'+'\\'+sar+'\\slc'+str(2*RECT_SIZE)+'.txt', 'w',encoding='utf-8')
 
 rows = ds.RasterYSize
 cols = ds.RasterXSize
@@ -24,9 +29,9 @@ im_data1 = band1.ReadAsArray()  # 获取数据
 im_data2 = band2.ReadAsArray()  # 获取数据
 im_data3 = band3.ReadAsArray()  # 获取数据
 
-im_data1 = (im_data1 - (ST[0][0])) / ((ST[0][1]) - (ST[0][0]))
-im_data2 = (im_data2 - (ST[1][0])) / ((ST[1][1]) - (ST[1][0]))
-im_data3 = (im_data3 - (ST[2][0])) / ((ST[2][1]) - (ST[2][0]))
+im_data1 = (im_data1 - (im_data1.min())) / ((im_data1.max()) - (im_data1.min()))
+im_data2 = (im_data2 - (im_data2.min())) / ((im_data2.max()) - (im_data2.min()))
+im_data3 = (im_data3 - (im_data3.min())) / ((im_data3.max()) - (im_data3.min()))
 
 
 def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1,np2,np3):
@@ -44,7 +49,7 @@ def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1,np2,np3):
     out_band.WriteArray(np3)
     return
 
-slc = gdal.Open(r'E:\ALOSPALSAR\Beaufort\91510\ALOS-P1_1__A-ORBIT__ALPSRP205991510_Cal_ML.tif')
+
 
 srows = slc.RasterYSize
 scols = slc.RasterXSize
@@ -90,11 +95,10 @@ def write_slc(filename, XSIZE, YSIZE, Bands, DataType, np1,np2,np3,np4):
     out_band.WriteArray(np4)
     return
 #"E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli48.txt"
-label = open('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli24.txt', 'w',encoding='utf-8')
-labeltxt=open('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\slc24.txt', 'w',encoding='utf-8')
+
 #E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli48
-for i in range(500, 800):
-    for j in range(100, 400):
+for i in range(150, 450):
+    for j in range(0, 300):
         cut1 = im_data1[2*i:2*i + 2*RECT_SIZE, 2*j:2*j + 2*RECT_SIZE]
         cut2 = im_data2[2*i:2*i + 2*RECT_SIZE, 2*j:2*j + 2*RECT_SIZE]
         cut3 = im_data3[2*i:2*i + 2*RECT_SIZE, 2*j:2*j + 2*RECT_SIZE]
@@ -105,15 +109,15 @@ for i in range(500, 800):
         nnpp4 = imgVV[2*i:2*i + 2*RECT_SIZE, 2*j:2*j + 2*RECT_SIZE]
 
 
-        write_img('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli24\\'+'test_'+str(i)+'and'+str(j)+'.tif', 2*RECT_SIZE, 2*RECT_SIZE, 3, band1.DataType,cut1,cut2,cut3)
-        label.write('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli24\\'+'test_'+str(i)+'and'+str(j)+'.tif'+' '+'0\n')
+        write_img('E:\ALOSPALSAR\ValidationData'+'\\'+sar+'\\pauli'+str(2*RECT_SIZE)+'\\'+'test_'+str(i)+'and'+str(j)+'.tif', 2*RECT_SIZE, 2*RECT_SIZE, 3, band1.DataType,cut1,cut2,cut3)
+        label.write('E:\ALOSPALSAR\ValidationData'+'\\'+sar+'\\pauli'+str(2*RECT_SIZE)+'\\'+'test_'+str(i)+'and'+str(j)+'.tif'+' '+'0\n')
 
         write_slc(
-            'E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\slc24' + '\\' + 'SLC_' + str(
+            'E:\ALOSPALSAR\ValidationData'+'\\'+sar+'\\slc'+str(2*RECT_SIZE) + '\\' + 'SLC_' + str(
                 2*i) + '_' + str(2*j) + '.tif', 2 * RECT_SIZE, 2 * RECT_SIZE,4, sband1.DataType, nnpp1,nnpp2,nnpp3,nnpp4)
 
         labeltxt.write(
-            'E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\slc24' + '\\' + 'SLC_' + str(
+            'E:\ALOSPALSAR\ValidationData'+'\\'+sar+'\\slc'+str(2*RECT_SIZE) + '\\' + 'SLC_' + str(
                 2*i) + '_' + str(2*j) + '.tif' + ' ' + str(0) + '\n')
 
 

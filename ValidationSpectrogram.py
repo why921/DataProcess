@@ -1,19 +1,20 @@
 import numpy as np
 from osgeo import gdal
 from scipy import fftpack
+#from ValidationData import sar
 import cv2
 
-
+sar='ALPSRP201761520'
 num=0
 
-win_size=12
+win_size=24
 
 hamming_win = np.hamming(win_size)
 hamming_win_2d = np.sqrt(np.outer(hamming_win, hamming_win))
 #"E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\spe4bands24.txt"
 #"E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\slc48.txt"
-imgtxt = open('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\slc24.txt', 'r')
-SLCtxt=open('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\spe4bands12.txt', 'w')
+imgtxt = open('E:\ALOSPALSAR\ValidationData'+'\\'+sar+'\\slc'+str(2*win_size)+'.txt', 'r')
+SLCtxt=open('E:\ALOSPALSAR\ValidationData'+'\\'+sar+'\\spe4bands'+str(win_size)+'.txt', 'w')
 
 def write_img(filename, XSIZE, YSIZE, Bands, DataType, np1,np2,np3,np4):
     gtiff_driver = gdal.GetDriverByName('GTiff')
@@ -62,7 +63,7 @@ while True:
         for i in range(0, win_size):
             for j in range(0, win_size):
                 spectrogram1[:, :, i, j] = fftpack.ifftn(hamming_win_2d * slc_fft1[i:i + win_size, j:j + win_size],
-                                                        shape=[win_size, win_size])
+                                                         shape=[win_size, win_size])
                 spectrogram2[:, :, i, j] = fftpack.ifftn(hamming_win_2d * slc_fft2[i:i + win_size, j:j + win_size],
                                                          shape=[win_size, win_size])
                 spectrogram3[:, :, i, j] = fftpack.ifftn(hamming_win_2d * slc_fft3[i:i + win_size, j:j + win_size],
@@ -88,8 +89,10 @@ while True:
         ff3 = ff3 / (x * y)
         ff4 = ff4 / (x * y)
         #E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\spe4bands24
-        write_img('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\spe4bands12'+'\\'+'spe4bands_'+str(num)+'.tif',win_size,win_size,4,band1.DataType,ff1,ff2,ff3,ff4)
-        SLCtxt.write('E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\spe4bands12\spe4bands_'+str(num)+'.tif'+' '+str(img_label))
+       
+        write_img('E:\ALOSPALSAR\ValidationData'+'\\'+sar+'\\spe4bands'+str(win_size)+'\\'+'spe4bands_'+str(num)+'.tif',win_size,win_size,4,band1.DataType,ff1,ff2,ff3,ff4)
+
+        SLCtxt.write('E:\ALOSPALSAR\ValidationData'+'\\'+sar+'\\spe4bands'+str(win_size)+'\spe4bands_'+str(num)+'.tif'+' '+str(img_label))
         num=num+1
     else:
         break
