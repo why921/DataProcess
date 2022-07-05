@@ -8,12 +8,12 @@ path='E:\ALOSPALSAR\TrainData'
 
 ds = gdal.Open(SLC_img_path)
 
-spectrogramtxt = open("E:\\ALOSPALSAR\\TrainData\\spe24.txt", 'r')
-spe4btxt=open("E:\\ALOSPALSAR\\TrainData\\spe4bands24.txt", 'w')
+spectrogramtxt = open("E:\\ALOSPALSAR\\TrainData\\spe18.txt", 'r')
+spe4btxt=open("E:\\ALOSPALSAR\\TrainData\\spe4bands18.txt", 'w')
 
 lines = spectrogramtxt.readlines()
 
-size=24
+size=18
 
 
 
@@ -57,7 +57,7 @@ for i in range(0, int(len(lines) / 4)):
     bandVV = dsVV.GetRasterBand(1)
     speVV = bandVV.ReadAsArray()
 
-    write_img('E:\\ALOSPALSAR\\TrainData\\spe4bands24'+'\\'+'spe'+str(2*RECT_SIZE)+'_'+str(i)+'_4b_'+str(labelid)+'.tif',size,size,4,bandHH.DataType,speHH,speHV,speVH,speVV)
-    spe4btxt.write('E:\\ALOSPALSAR\\TrainData\\spe4bands24'+'\\'+'spe'+str(2*RECT_SIZE)+'_'+str(i)+'_4b_'+str(labelid)+'.tif'+ ' ' + str(label))
+    write_img('E:\\ALOSPALSAR\\TrainData\\spe4bands18'+'\\'+'spe'+str(2*RECT_SIZE)+'_'+str(i)+'_4b_'+str(labelid)+'.tif',size,size,4,bandHH.DataType,speHH,speHV,speVH,speVV)
+    spe4btxt.write('E:\\ALOSPALSAR\\TrainData\\spe4bands18'+'\\'+'spe'+str(2*RECT_SIZE)+'_'+str(i)+'_4b_'+str(labelid)+'.tif'+ ' ' + str(label))
 
 spe4btxt.close()

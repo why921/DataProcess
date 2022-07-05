@@ -4,7 +4,7 @@ from scipy import fftpack
 #from ValidationData import sar
 import cv2
 
-sar='ALPSRP201761520'
+sar='ALPSRP279121560'
 num=0
 
 win_size=24

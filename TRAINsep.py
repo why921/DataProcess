@@ -50,9 +50,9 @@ while True:
             ff0 = spectrogram[K, :, :]
             ff += (ff0 - (ff0.min())) / ((ff0.max()) - (ff0.min()))
         ff = ff / (x * y)
-        cv2.imwrite('E:\\ALOSPALSAR\\TrainData\\spe24'+'\\'+'spe_'+str(num)+'.tif',ff)
+        cv2.imwrite('E:\\ALOSPALSAR\\TrainData\\spe18'+'\\'+'spe_'+str(num)+'.tif',ff)
         #path+'\\'+sar+'\\'+sar+'_24\\'+sar+
-        spetxt.write('E:\\ALOSPALSAR\\TrainData\\spe24'+'\\'+'spe_'+str(num)+'.tif'+' '+str(img_label))
+        spetxt.write('E:\\ALOSPALSAR\\TrainData\\spe18'+'\\'+'spe_'+str(num)+'.tif'+' '+str(img_label))
         num=num+1
     else:
         break

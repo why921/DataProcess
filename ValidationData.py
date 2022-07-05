@@ -5,14 +5,14 @@ from osgeo import gdal
 from img_statistics import ALPSRP205991510
 
 
-sar='ALPSRP201761520'
-RECT_SIZE=24
+sar='ALPSRP279121560'
+RECT_SIZE=18
 #"E:\ALOSPALSAR\Beaufort\91510\ALOS-P1_1__A-ORBIT__ALPSRP205991510_Cal_ML_Spk_Decomp.tif"
 #"E:\ALOSPALSAR\Beaufort\91510\ALOS-P1_1__A-ORBIT__ALPSRP205991510_Cal_ML.tif"
 
 #"E:\ALOSPALSAR\Beaufort\61520\ALOS-P1_1__A-ORBIT__ALPSRP201761520_Cal_ML_Spk_Decomp.tif"
-ds = gdal.Open(r'E:\ALOSPALSAR\Beaufort\61520\ALOS-P1_1__A-ORBIT__ALPSRP201761520_Cal_ML_Spk_Decomp.tif')
-slc = gdal.Open(r'E:\ALOSPALSAR\Beaufort\61520\ALOS-P1_1__A-ORBIT__ALPSRP201761520_Cal_ML.tif')
+ds = gdal.Open(r'E:\ALOSPALSAR\SevernayaZemlya\\21560\\ALOS-P1_1__A-ORBIT__ALPSRP279121560_Cal_ML_Spk_Decomp.tif')
+slc = gdal.Open(r'E:\ALOSPALSAR\SevernayaZemlya\21560\ALOS-P1_1__A-ORBIT__ALPSRP279121560_Cal_ML.tif')
 
 label = open('E:\ALOSPALSAR\ValidationData'+'\\'+sar+'\\pauli'+str(2*RECT_SIZE)+'.txt', 'w',encoding='utf-8')
 labeltxt=open('E:\ALOSPALSAR\ValidationData'+'\\'+sar+'\\slc'+str(2*RECT_SIZE)+'.txt', 'w',encoding='utf-8')
@@ -97,8 +97,8 @@ def write_slc(filename, XSIZE, YSIZE, Bands, DataType, np1,np2,np3,np4):
 #"E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli48.txt"
 
 #E:\ALOSPALSAR\ValidationData\ALPSRP205991510test\pauli48
-for i in range(150, 450):
-    for j in range(0, 300):
+for i in range(1050, 1350):
+    for j in range(250, 550):
         cut1 = im_data1[2*i:2*i + 2*RECT_SIZE, 2*j:2*j + 2*RECT_SIZE]
         cut2 = im_data2[2*i:2*i + 2*RECT_SIZE, 2*j:2*j + 2*RECT_SIZE]
         cut3 = im_data3[2*i:2*i + 2*RECT_SIZE, 2*j:2*j + 2*RECT_SIZE]

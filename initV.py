@@ -1,7 +1,7 @@
 import os
 
 
-path='E:\ALOSPALSAR\ValidationData\ALPSRP201761520'
+path='E:\ALOSPALSAR\ValidationData\ALPSRP279121560'
 
 os.makedirs(path+'\\'+'pauli24',exist_ok=True)
 os.makedirs(path+'\\'+'pauli36',exist_ok=True)
@@ -12,6 +12,8 @@ os.makedirs(path+'\\'+'slc36',exist_ok=True)
 os.makedirs(path+'\\'+'slc48',exist_ok=True)
 
 os.makedirs(path+'\\'+'spe4bands12',exist_ok=True)
+os.makedirs(path+'\\'+'spe4bands18',exist_ok=True)
+os.makedirs(path+'\\'+'spe4bands24',exist_ok=True)
 
 f1=open(path+'\\'+'pauli24.txt','w')
 f2=open(path+'\\'+'pauli36.txt','w')
@@ -22,6 +24,8 @@ f5=open(path+'\\'+'slc36.txt','w')
 f6=open(path+'\\'+'slc48.txt','w')
 
 f7=open(path+'\\'+'spe4bands12.txt','w')
+f8=open(path+'\\'+'spe4bands18.txt','w')
+f9=open(path+'\\'+'spe4bands24.txt','w')
 
 f1.close()
 f2.close()
@@ -30,3 +34,5 @@ f4.close()
 f5.close()
 f6.close()
 f7.close()
+f8.close()
+f9.close()
